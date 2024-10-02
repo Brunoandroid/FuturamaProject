@@ -35,6 +35,7 @@ fun DetailScreen(navHostController: NavHostController) {
             fontWeight = FontWeight.Bold
         )
     }
+
 }
 
 @Composable
