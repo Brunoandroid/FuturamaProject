@@ -3,6 +3,7 @@ package com.example.futuramaproject.screens.details
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,7 +31,7 @@ fun DetailScreen(navHostController: NavHostController) {
                 }
             },
             text = "Detail",
-            color = Color.Cyan,
+            color = MaterialTheme.colorScheme.primary,
             fontSize = 35.sp,
             fontWeight = FontWeight.Bold
         )
