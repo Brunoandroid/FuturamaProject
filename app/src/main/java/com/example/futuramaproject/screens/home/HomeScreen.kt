@@ -21,9 +21,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.futuramaproject.R
@@ -60,7 +60,8 @@ fun AppBar() {
 
 @Composable
 fun ContentPage(navHostController: NavHostController, paddingValues: PaddingValues) {
-    var showDialog by rememberSaveable { mutableStateOf(false) }
+    val viewModel: HomeViewModel = viewModel()
+    val showDialog by viewModel.isShowDialog.collectAsState()
 
     Column(
         modifier = Modifier
@@ -71,7 +72,7 @@ fun ContentPage(navHostController: NavHostController, paddingValues: PaddingValu
         verticalArrangement = Arrangement.Center
     ) {
         LoadImage(imageResId = R.drawable.futurama, size = 200.dp, onClick = {
-            showDialog = true
+            viewModel.showDialog()
         })
 
         Button(
@@ -88,7 +89,7 @@ fun ContentPage(navHostController: NavHostController, paddingValues: PaddingValu
         }
 
         if (showDialog) {
-            FullScreenImageDialog(onDismiss = { showDialog = false })
+            FullScreenImageDialog(onDismiss = { viewModel.hideDialog() })
         }
     }
 }
