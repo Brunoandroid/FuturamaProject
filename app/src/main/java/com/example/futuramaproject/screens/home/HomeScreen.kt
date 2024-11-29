@@ -95,29 +95,6 @@ fun ContentPage(navHostController: NavHostController, paddingValues: PaddingValu
 }
 
 @Composable
-fun FullScreenImageDialog(onDismiss: () -> Unit) {
-    Dialog(
-        onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false)
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Black)
-        ) {
-            LoadImage(
-                imageResId = R.drawable.futurama, isFillMaxSize = true
-            )
-            IconButton(modifier = Modifier
-                .align(Alignment.TopEnd)
-                .padding(top = 40.dp),
-                onClick = { onDismiss() }) {
-                Icon(imageVector = Icons.Default.Clear, contentDescription = "")
-            }
-        }
-    }
-}
-
-@Composable
 @Preview(showBackground = true)
 fun HomeScreenPreview() {
     HomeScreen(navHostController = rememberNavController())
