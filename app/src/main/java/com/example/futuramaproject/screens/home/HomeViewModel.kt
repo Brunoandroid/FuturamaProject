@@ -1,10 +1,13 @@
 package com.example.futuramaproject.screens.home
 
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor() : ViewModel() {
     private val _isShowDialog = MutableStateFlow(false)
     val isShowDialog: StateFlow<Boolean> get() = _isShowDialog
 
