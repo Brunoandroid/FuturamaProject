@@ -6,5 +6,5 @@ import javax.inject.Inject
 class Repository @Inject constructor(
     private val apiService: ApiService
 ) {
-    suspend fun getItems() = apiService.getItems()
+    suspend fun getCharacters() = apiService.getCharacters()
 }

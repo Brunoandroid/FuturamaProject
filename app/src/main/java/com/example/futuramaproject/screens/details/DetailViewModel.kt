@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.futuramaproject.data.model.CharacterItem
 import com.example.futuramaproject.data.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -14,8 +15,8 @@ class DetailViewModel @Inject constructor(
     private val repository: Repository
 ): ViewModel() {
 
-    private val _items = MutableLiveData<String?>()
-    val items: LiveData<String?> = _items
+    private val _items = MutableLiveData<List<CharacterItem>>()
+    val items: LiveData<List<CharacterItem>> = _items
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -27,8 +28,8 @@ class DetailViewModel @Inject constructor(
     private fun fetch() {
         viewModelScope.launch {
             _isLoading.postValue(true)
-            val result = repository.getItems()
-            _items.postValue(result.toString())
+            val result = repository.getCharacters()
+            _items.postValue(result.characterItems)
             _isLoading.postValue(false)
         }
     }

@@ -12,7 +12,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object ApiModule {
 
-    private const val BASE_URL = "https://catfact.ninja"
+    private const val BASE_URL = "https://futuramaapi.com"
 
     @Provides
     @Singleton
