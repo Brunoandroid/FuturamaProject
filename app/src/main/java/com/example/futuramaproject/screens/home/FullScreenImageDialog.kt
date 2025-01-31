@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.example.futuramaproject.R
-import com.example.futuramaproject.components.LoadImage
+import com.example.futuramaproject.components.LoadImageLocal
 
 @Composable
 fun FullScreenImageDialog(onDismiss: () -> Unit) {
@@ -28,7 +28,7 @@ fun FullScreenImageDialog(onDismiss: () -> Unit) {
                 .fillMaxSize()
                 .background(Color.Black)
         ) {
-            LoadImage(
+            LoadImageLocal(
                 imageResId = R.drawable.futurama, isFillMaxSize = true
             )
             IconButton(modifier = Modifier

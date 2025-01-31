@@ -1,8 +1,11 @@
 package com.example.futuramaproject.screens.details
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -20,7 +23,10 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.futuramaproject.R
 import com.example.futuramaproject.Screen
+import com.example.futuramaproject.components.CustomText
+import com.example.futuramaproject.components.LoadImageUrl
 import com.example.futuramaproject.data.model.CharacterItem
 
 @Composable
@@ -45,17 +51,56 @@ fun CharacterListScreen(navHostController: NavHostController, characters: List<C
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         items(characters) { character ->
-            Text(
-                modifier = Modifier.clickable {
+            CharacterListItem(navHostController, character)
+        }
+    }
+}
+
+@Composable
+private fun CharacterListItem(
+    navHostController: NavHostController,
+    character: CharacterItem
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(10.dp)
+    ) {
+        LoadImageUrl(imageUrl = character.image, size = 130.dp)
+        Column(
+            modifier = Modifier.height(130.dp),
+            horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            CustomText(
+                onClick = {
                     navHostController.navigate(Screen.Home.route) {
                         popUpTo(Screen.Home.route) { inclusive = true }
                     }
                 },
                 text = character.name,
-                color = MaterialTheme.colorScheme.primary,
-                fontSize = 14.sp,
+                color = R.color.black,
+                fontSize = 20.sp,
                 fontWeight = FontWeight.Medium
             )
+            Row {
+                CustomText(
+                    text = character.status,
+                    color = R.color.gray,
+                )
+            }
+            Row {
+                CustomText(
+                    text = character.species,
+                    color = R.color.gray,
+                )
+            }
+            Row {
+                CustomText(
+                    text = character.gender,
+                    color = R.color.gray,
+                )
+            }
         }
     }
 }
