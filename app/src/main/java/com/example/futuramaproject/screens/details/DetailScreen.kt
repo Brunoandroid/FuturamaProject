@@ -1,6 +1,5 @@
 package com.example.futuramaproject.screens.details
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,9 +9,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -40,7 +41,6 @@ import com.example.futuramaproject.components.LoadImageLocal
 import com.example.futuramaproject.components.LoadImageUrl
 import com.example.futuramaproject.data.model.CharacterItem
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun DetailScreen(navHostController: NavHostController) {
     val viewModel: DetailViewModel = hiltViewModel()
@@ -175,11 +175,9 @@ fun DetailScreenLoading() {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = "Carregando. . .",
-            color = MaterialTheme.colorScheme.primary,
-            fontSize = 35.sp,
-            fontWeight = FontWeight.Bold
+        CircularProgressIndicator(
+            modifier = Modifier.size(50.dp),
+            color = MaterialTheme.colorScheme.primary
         )
     }
 }
