@@ -77,7 +77,7 @@ fun ContentPage(navHostController: NavHostController, paddingValues: PaddingValu
             shape = RectangleShape,
             onClick = { navHostController.navigate(Screen.Detail.route) },
         ) {
-            Text(color = Color.White, text = "Iniciar")
+            Text(color = Color.White, text = "Ver Personagens")
         }
 
         if (showDialog) {
