@@ -40,6 +40,15 @@ import com.example.futuramaproject.components.CustomText
 import com.example.futuramaproject.components.LoadImageLocal
 import com.example.futuramaproject.components.LoadImageUrl
 import com.example.futuramaproject.data.model.CharacterItem
+import com.example.futuramaproject.ui.theme.Black
+import com.example.futuramaproject.ui.theme.Blue500
+import com.example.futuramaproject.ui.theme.Dimens
+import com.example.futuramaproject.ui.theme.Gray
+import com.example.futuramaproject.ui.theme.Green500
+import com.example.futuramaproject.ui.theme.Purple500
+import com.example.futuramaproject.ui.theme.Red500
+import com.example.futuramaproject.ui.theme.White
+import com.example.futuramaproject.ui.theme.Yellow500
 
 @Composable
 fun DetailScreen(navHostController: NavHostController) {
@@ -49,7 +58,7 @@ fun DetailScreen(navHostController: NavHostController) {
 
     Scaffold(
         topBar = { AppBar() },
-        containerColor = Color.White
+        containerColor = White
     ) { paddingValues ->
         when {
             isLoading -> DetailScreenLoading()
@@ -97,22 +106,22 @@ private fun CharacterListItem(
     character: CharacterItem
 ) {
     val statusColor = when (character.status.lowercase()) {
-        "alive" -> R.color.green_500
-        "dead" -> R.color.red_500
-        else -> R.color.yellow_500
+        "alive" -> Green500
+        "dead" -> Red500
+        else -> Yellow500
     }
     Row(
         modifier = Modifier
             .fillMaxSize()
-            .padding(10.dp)
+            .padding(Dimens.PaddingSmall)
     ) {
         LoadImageUrl(
             imageUrl = character.image,
-            size = 130.dp,
+            size = Dimens.SizeXXLarge,
             isRoundedImage = true,
-            radius = 16.dp
+            radius = Dimens.RadiusMedium
         )
-        Spacer(modifier = Modifier.width(20.dp))
+        Spacer(modifier = Modifier.width(Dimens.MarginLarge))
         Column(
             modifier = Modifier.height(130.dp),
             horizontalAlignment = Alignment.Start,
@@ -125,44 +134,44 @@ private fun CharacterListItem(
                     }
                 },
                 text = character.name,
-                color = R.color.black,
-                fontSize = 20.sp,
+                color = Black,
+                fontSize = Dimens.FontSizeXLarge,
                 fontWeight = FontWeight.Medium
             )
             Row {
                 LoadImageLocal(
                     imageResId = R.drawable.circle_dot,
-                    size = 16.dp,
+                    size = Dimens.SizeSmall,
                     iconColor = statusColor
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(Dimens.MarginSmall))
                 CustomText(
                     text = character.status,
-                    color = R.color.gray,
+                    color = Gray,
                 )
             }
             Row {
                 LoadImageLocal(
                     imageResId = R.drawable.users,
-                    size = 16.dp,
-                    iconColor = R.color.blue_500
+                    size = Dimens.SizeSmall,
+                    iconColor = Blue500
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(Dimens.MarginSmall))
                 CustomText(
                     text = character.species,
-                    color = R.color.gray,
+                    color = Gray,
                 )
             }
             Row {
                 LoadImageLocal(
                     imageResId = R.drawable.user,
-                    size = 16.dp,
-                    iconColor = R.color.purple_500
+                    size = Dimens.SizeSmall,
+                    iconColor = Purple500
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(Dimens.MarginSmall))
                 CustomText(
                     text = character.gender,
-                    color = R.color.gray,
+                    color = Gray,
                 )
             }
         }
@@ -176,7 +185,7 @@ fun DetailScreenLoading() {
         contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator(
-            modifier = Modifier.size(50.dp),
+            modifier = Modifier.size(Dimens.SizeLarge),
             color = MaterialTheme.colorScheme.primary
         )
     }
@@ -189,9 +198,9 @@ fun DetailsEmptyScreen() {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Nenhum dado retornado",
+            text = stringResource(id = R.string.no_data_returned),
             color = MaterialTheme.colorScheme.primary,
-            fontSize = 35.sp,
+            fontSize = Dimens.FontSizeXXXLarge,
             fontWeight = FontWeight.Bold
         )
     }
@@ -205,5 +214,5 @@ fun DetailScreenPreview() {
         CharacterItem("2024-01-02", "Female", 2, "", "Leela", "Mutant", "Alive"),
         CharacterItem("2024-01-03", "Male", 3, "", "Fry", "Human", "Alive")
     )
-    CharacterListScreen(PaddingValues(16.dp), navHostController = rememberNavController(), fakeCharacters)
+    CharacterListScreen(PaddingValues(Dimens.PaddingMedium), navHostController = rememberNavController(), fakeCharacters)
 }

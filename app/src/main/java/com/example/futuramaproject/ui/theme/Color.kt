@@ -9,12 +9,16 @@ val Grey40 = Color(0xFF999999)
 val Grey50 = Color(0xFF7F7F7F)
 val Grey80 = Color(0xFF333333)
 
-val Purple40 = Color(0xFF6650a4)
-val Purple80 = Color(0xFFD0BCFF)
+val Blue500 = Color(0xFF3B82F6)
 
-val PurpleGrey40 = Color(0xFF625b71)
-val PurpleGrey80 = Color(0xFFCCC2DC)
+val Purple500 = Color(0xFFA855F7)
 
-val Pink40 = Color(0xFF7D5260)
-val Pink80 = Color(0xFFEFB8C8)
+val Green500 = Color(0xFF22C55E)
 
+val Red500 = Color(0xFFEF4444)
+
+val Yellow500 = Color(0xFFEAB308)
+
+val Gray = Color(0xFF696969)
+val White = Color(0xFFFFFFFF)
+val Black = Color(0xFF000000)

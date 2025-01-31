@@ -12,11 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.example.futuramaproject.R
 import com.example.futuramaproject.components.LoadImageLocal
+import com.example.futuramaproject.ui.theme.Black
+import com.example.futuramaproject.ui.theme.Dimens
 
 @Composable
 fun FullScreenImageDialog(onDismiss: () -> Unit) {
@@ -26,14 +27,14 @@ fun FullScreenImageDialog(onDismiss: () -> Unit) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Black)
+                .background(Black)
         ) {
             LoadImageLocal(
                 imageResId = R.drawable.futurama, isFillMaxSize = true
             )
             IconButton(modifier = Modifier
                 .align(Alignment.TopEnd)
-                .padding(top = 40.dp),
+                .padding(top = Dimens.PaddingLarge),
                 onClick = { onDismiss() }) {
                 Icon(imageVector = Icons.Default.Clear, contentDescription = "")
             }

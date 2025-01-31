@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
@@ -21,13 +22,14 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.futuramaproject.R
+import com.example.futuramaproject.ui.theme.Dimens
 
 @Composable
 fun LoadImageLocal(
     imageResId: Int,
     isFillMaxSize: Boolean = false,
-    size: Dp = 100.dp,
-    iconColor: Int ?= null ,
+    size: Dp = Dimens.SizeXLarge,
+    iconColor:  Color?= null,
     onClick: (() -> Unit)? = null
 ) {
     Image(
@@ -38,7 +40,7 @@ fun LoadImageLocal(
             .pointerInput(Unit) {
                 detectTapGestures(onTap = { onClick?.invoke() })
             },
-        colorFilter = iconColor?.let { ColorFilter.tint(colorResource(id = it)) }
+        colorFilter = iconColor?.let { ColorFilter.tint(it) }
     )
 }
 

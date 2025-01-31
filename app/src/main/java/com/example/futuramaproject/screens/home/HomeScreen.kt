@@ -20,17 +20,18 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.futuramaproject.R
 import com.example.futuramaproject.Screen
 import com.example.futuramaproject.components.LoadImageLocal
+import com.example.futuramaproject.ui.theme.Black
+import com.example.futuramaproject.ui.theme.Dimens
+import com.example.futuramaproject.ui.theme.White
 
 @Composable
 fun HomeScreen(navHostController: NavHostController) {
@@ -63,21 +64,21 @@ fun ContentPage(navHostController: NavHostController, paddingValues: PaddingValu
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        LoadImageLocal(imageResId = R.drawable.futurama, size = 200.dp, onClick = {
+        LoadImageLocal(imageResId = R.drawable.futurama, size = Dimens.SizeXXXLarge, onClick = {
             viewModel.showDialog()
         })
 
         Button(
             modifier = Modifier
-                .padding(top = 50.dp)
+                .padding(top = Dimens.PaddingXLarge)
                 .fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Black,
+                containerColor = Black,
             ),
             shape = RectangleShape,
             onClick = { navHostController.navigate(Screen.Detail.route) },
         ) {
-            Text(color = Color.White, text = "Ver Personagens")
+            Text(color = White, text = stringResource(id = R.string.see_characters))
         }
 
         if (showDialog) {

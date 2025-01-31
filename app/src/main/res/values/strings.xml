@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Futurama</string>
+
+    <!-- HomeScreen-->
+    <string name="see_characters">Ver Personagens</string>
+
+    <!-- DetailScreen-->
+    <string name="no_data_returned">Nenhum dado retornado</string>
+
 </resources>
