@@ -1,4 +1,4 @@
-package com.example.futuramaproject.screens.details
+package com.example.futuramaproject.screens.initial
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailViewModel @Inject constructor(
+class InitialViewModel @Inject constructor(
     private val repository: Repository
 ): ViewModel() {
 

@@ -1,4 +1,4 @@
-package com.example.futuramaproject.screens.details
+package com.example.futuramaproject.screens.initial
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.futuramaproject.data.model.CharacterItem
@@ -15,13 +15,13 @@ import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class DetailViewModelTest {
+class InitialViewModelTest {
 
     @get:Rule
     val rule = InstantTaskExecutorRule()
 
     private val repository: Repository = mockk()
-    private lateinit var viewModel: DetailViewModel
+    private lateinit var viewModel: InitialViewModel
 
     @Before
     fun setUp() {
@@ -31,7 +31,7 @@ class DetailViewModelTest {
             page = 1, pages = 1, size = 1, total = 1
         )
 
-        viewModel = DetailViewModel(repository)
+        viewModel = InitialViewModel(repository)
     }
 
     @Test

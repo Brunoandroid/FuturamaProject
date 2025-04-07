@@ -76,7 +76,7 @@ fun ContentPage(navHostController: NavHostController, paddingValues: PaddingValu
                 containerColor = Black,
             ),
             shape = RectangleShape,
-            onClick = { navHostController.navigate(Screen.Detail.route) },
+            onClick = {navHostController.navigate(Screen.Initial.route)}
         ) {
             Text(color = White, text = stringResource(id = R.string.see_characters))
         }

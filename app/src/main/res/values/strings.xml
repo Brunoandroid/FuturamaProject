@@ -4,7 +4,10 @@
     <!-- HomeScreen-->
     <string name="see_characters">Ver Personagens</string>
 
-    <!-- DetailScreen-->
+    <!-- InitialScreen-->
     <string name="no_data_returned">Nenhum dado retornado</string>
+
+    <!-- DetailScreen-->
+    <string name="details_character">Detalhes</string>
 
 </resources>

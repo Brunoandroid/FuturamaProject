@@ -1,5 +1,6 @@
-package com.example.futuramaproject.screens.details
+package com.example.futuramaproject.screens.initial
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,12 +26,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -51,8 +50,8 @@ import com.example.futuramaproject.ui.theme.White
 import com.example.futuramaproject.ui.theme.Yellow500
 
 @Composable
-fun DetailScreen(navHostController: NavHostController) {
-    val viewModel: DetailViewModel = hiltViewModel()
+fun InitialScreen(navHostController: NavHostController) {
+    val viewModel: InitialViewModel = hiltViewModel()
     val isLoading by viewModel.isLoading.observeAsState(true)
     val items by viewModel.items.observeAsState()
 
@@ -61,8 +60,8 @@ fun DetailScreen(navHostController: NavHostController) {
         containerColor = White
     ) { paddingValues ->
         when {
-            isLoading -> DetailScreenLoading()
-            items.isNullOrEmpty() -> DetailsEmptyScreen()
+            isLoading -> InitialScreenLoading()
+            items.isNullOrEmpty() -> InitialEmptyScreen()
             else -> CharacterListScreen(
                 paddingValues,
                 navHostController,
@@ -95,7 +94,10 @@ fun CharacterListScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         items(characters) { character ->
-            CharacterListItem(navHostController, character)
+            CharacterListItem(navHostController,
+                character,
+                onClick = {navHostController.navigate(Screen.Detail.route)}
+            )
         }
     }
 }
@@ -103,7 +105,8 @@ fun CharacterListScreen(
 @Composable
 private fun CharacterListItem(
     navHostController: NavHostController,
-    character: CharacterItem
+    character: CharacterItem,
+    onClick: (() -> Unit)
 ) {
     val statusColor = when (character.status.lowercase()) {
         "alive" -> Green500
@@ -114,6 +117,7 @@ private fun CharacterListItem(
         modifier = Modifier
             .fillMaxSize()
             .padding(Dimens.PaddingSmall)
+            .clickable { onClick.invoke() }
     ) {
         LoadImageUrl(
             imageUrl = character.image,
@@ -179,7 +183,7 @@ private fun CharacterListItem(
 }
 
 @Composable
-fun DetailScreenLoading() {
+fun InitialScreenLoading() {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -192,7 +196,7 @@ fun DetailScreenLoading() {
 }
 
 @Composable
-fun DetailsEmptyScreen() {
+fun InitialEmptyScreen() {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
