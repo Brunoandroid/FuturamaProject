@@ -1,20 +1,8 @@
 package com.example.futuramaproject.screens.home
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -27,8 +15,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.futuramaproject.R
-import com.example.futuramaproject.Screen
+import com.example.futuramaproject.navigation.Screen
+import com.example.futuramaproject.components.FuturamaAppBar
 import com.example.futuramaproject.components.LoadImageLocal
+import com.example.futuramaproject.screens.home.sections.FullScreenImageDialog
 import com.example.futuramaproject.ui.theme.Black
 import com.example.futuramaproject.ui.theme.Dimens
 import com.example.futuramaproject.ui.theme.White
@@ -36,23 +26,20 @@ import com.example.futuramaproject.ui.theme.White
 @Composable
 fun HomeScreen(navHostController: NavHostController) {
     Scaffold(
-        topBar = { AppBar() },
+        topBar = { FuturamaAppBar() },
     ) { paddingValues ->
-        ContentPage(navHostController, paddingValues)
+        ContentPage(
+            navHostController,
+            paddingValues
+        )
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppBar() {
-    TopAppBar(
-        title = { Text(text = stringResource(R.string.app_name)) },
-        colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primary)
-    )
-}
-
-@Composable
-fun ContentPage(navHostController: NavHostController, paddingValues: PaddingValues) {
+fun ContentPage(
+    navHostController: NavHostController,
+    paddingValues: PaddingValues
+) {
     val viewModel: HomeViewModel = viewModel()
     val showDialog by viewModel.isShowDialog.collectAsState()
 
@@ -64,9 +51,12 @@ fun ContentPage(navHostController: NavHostController, paddingValues: PaddingValu
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        LoadImageLocal(imageResId = R.drawable.futurama, size = Dimens.SizeXXXLarge, onClick = {
-            viewModel.showDialog()
-        })
+        LoadImageLocal(
+            imageResId = R.drawable.futurama,
+            size = Dimens.SizeXXXLarge,
+            onClick = {
+                viewModel.showDialog()
+            })
 
         Button(
             modifier = Modifier
@@ -76,7 +66,7 @@ fun ContentPage(navHostController: NavHostController, paddingValues: PaddingValu
                 containerColor = Black,
             ),
             shape = RectangleShape,
-            onClick = {navHostController.navigate(Screen.Initial.route)}
+            onClick = { navHostController.navigate(Screen.Initial.route) }
         ) {
             Text(color = White, text = stringResource(id = R.string.see_characters))
         }

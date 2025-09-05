@@ -1,26 +1,13 @@
 package com.example.futuramaproject.screens.initial
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -29,156 +16,43 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.futuramaproject.R
-import com.example.futuramaproject.Screen
-import com.example.futuramaproject.components.CustomText
-import com.example.futuramaproject.components.LoadImageLocal
-import com.example.futuramaproject.components.LoadImageUrl
+import com.example.futuramaproject.components.FuturamaAppBar
 import com.example.futuramaproject.data.model.CharacterItem
-import com.example.futuramaproject.ui.theme.Black
-import com.example.futuramaproject.ui.theme.Blue500
+import com.example.futuramaproject.screens.initial.sections.CharacterListScreen
 import com.example.futuramaproject.ui.theme.Dimens
-import com.example.futuramaproject.ui.theme.Gray
-import com.example.futuramaproject.ui.theme.Green500
-import com.example.futuramaproject.ui.theme.Purple500
-import com.example.futuramaproject.ui.theme.Red500
 import com.example.futuramaproject.ui.theme.White
-import com.example.futuramaproject.ui.theme.Yellow500
 
 @Composable
 fun InitialScreen(navHostController: NavHostController) {
+    Scaffold(
+        topBar = { FuturamaAppBar() }, containerColor = White
+    ) { paddingValues ->
+        ContentPage(
+            paddingValues = paddingValues,
+            navHostController = navHostController
+        )
+    }
+}
+
+@Composable
+private fun ContentPage(
+    paddingValues: PaddingValues,
+    navHostController: NavHostController
+) {
     val viewModel: InitialViewModel = hiltViewModel()
     val isLoading by viewModel.isLoading.observeAsState(true)
     val items by viewModel.items.observeAsState()
 
-    Scaffold(
-        topBar = { AppBar() },
-        containerColor = White
-    ) { paddingValues ->
-        when {
-            isLoading -> InitialScreenLoading()
-            items.isNullOrEmpty() -> InitialEmptyScreen()
-            else -> CharacterListScreen(
-                paddingValues,
-                navHostController,
-                items ?: listOf()
-            )
-        }
-    }
-
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun AppBar() {
-    TopAppBar(
-        title = { Text(text = stringResource(R.string.app_name)) },
-        colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primary)
-    )
-}
-
-@Composable
-fun CharacterListScreen(
-    paddingValues: PaddingValues,
-    navHostController: NavHostController,
-    characters: List<CharacterItem>
-) {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(paddingValues),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        items(characters) { character ->
-            CharacterListItem(navHostController,
-                character,
-                onClick = {navHostController.navigate(Screen.Detail.route)}
-            )
-        }
-    }
-}
-
-@Composable
-private fun CharacterListItem(
-    navHostController: NavHostController,
-    character: CharacterItem,
-    onClick: (() -> Unit)
-) {
-    val statusColor = when (character.status.lowercase()) {
-        "alive" -> Green500
-        "dead" -> Red500
-        else -> Yellow500
-    }
-    Row(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(Dimens.PaddingSmall)
-            .clickable { onClick.invoke() }
-    ) {
-        LoadImageUrl(
-            imageUrl = character.image,
-            size = Dimens.SizeXXLarge,
-            isRoundedImage = true,
-            radius = Dimens.RadiusMedium
+    when {
+        isLoading -> InitialScreenLoading()
+        items.isNullOrEmpty() -> InitialEmptyScreen()
+        else -> CharacterListScreen(
+            paddingValues, navHostController, items ?: listOf()
         )
-        Spacer(modifier = Modifier.width(Dimens.MarginLarge))
-        Column(
-            modifier = Modifier.height(130.dp),
-            horizontalAlignment = Alignment.Start,
-            verticalArrangement = Arrangement.SpaceBetween
-        ) {
-            CustomText(
-                onClick = {
-                    navHostController.navigate(Screen.Home.route) {
-                        popUpTo(Screen.Home.route) { inclusive = true }
-                    }
-                },
-                text = character.name,
-                color = Black,
-                fontSize = Dimens.FontSizeXLarge,
-                fontWeight = FontWeight.Medium
-            )
-            Row {
-                LoadImageLocal(
-                    imageResId = R.drawable.circle_dot,
-                    size = Dimens.SizeSmall,
-                    iconColor = statusColor
-                )
-                Spacer(modifier = Modifier.width(Dimens.MarginSmall))
-                CustomText(
-                    text = character.status,
-                    color = Gray,
-                )
-            }
-            Row {
-                LoadImageLocal(
-                    imageResId = R.drawable.users,
-                    size = Dimens.SizeSmall,
-                    iconColor = Blue500
-                )
-                Spacer(modifier = Modifier.width(Dimens.MarginSmall))
-                CustomText(
-                    text = character.species,
-                    color = Gray,
-                )
-            }
-            Row {
-                LoadImageLocal(
-                    imageResId = R.drawable.user,
-                    size = Dimens.SizeSmall,
-                    iconColor = Purple500
-                )
-                Spacer(modifier = Modifier.width(Dimens.MarginSmall))
-                CustomText(
-                    text = character.gender,
-                    color = Gray,
-                )
-            }
-        }
     }
 }
 
@@ -218,5 +92,7 @@ fun DetailScreenPreview() {
         CharacterItem("2024-01-02", "Female", 2, "", "Leela", "Mutant", "Alive"),
         CharacterItem("2024-01-03", "Male", 3, "", "Fry", "Human", "Alive")
     )
-    CharacterListScreen(PaddingValues(Dimens.PaddingMedium), navHostController = rememberNavController(), fakeCharacters)
+    CharacterListScreen(
+        PaddingValues(Dimens.PaddingMedium), navHostController = rememberNavController(), fakeCharacters
+    )
 }

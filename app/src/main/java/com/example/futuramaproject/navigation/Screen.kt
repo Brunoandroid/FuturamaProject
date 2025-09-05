@@ -1,4 +1,4 @@
-package com.example.futuramaproject
+package com.example.futuramaproject.navigation
 
 sealed class Screen(val route: String) {
     data object Home: Screen(route = "home_screen")
