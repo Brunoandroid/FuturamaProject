@@ -28,7 +28,7 @@ fun CharacterListScreen(
             CharacterListItem(
                 navHostController,
                 character,
-                onClick = { navHostController.navigate(Screen.Detail.route) }
+                onClick = { navHostController.navigate("detail_screen/${character.id}") }
             )
         }
     }

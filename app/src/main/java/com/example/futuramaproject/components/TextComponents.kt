@@ -13,7 +13,7 @@ import com.example.futuramaproject.ui.theme.Dimens
 
 @Composable
 fun CustomText(
-    text: String,
+    text: String?,
     color: Color = Black,
     fontSize: TextUnit = Dimens.FontSizeMedium,
     fontWeight: FontWeight = FontWeight.Normal,
@@ -23,7 +23,7 @@ fun CustomText(
         modifier = Modifier.pointerInput(Unit) {
             detectTapGestures(onTap = { onClick?.invoke() })
         },
-        text = text,
+        text = text ?: "",
         color = color,
         fontSize = fontSize,
         fontWeight = fontWeight

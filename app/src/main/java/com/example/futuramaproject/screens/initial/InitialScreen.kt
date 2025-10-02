@@ -3,8 +3,6 @@ package com.example.futuramaproject.screens.initial
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -20,6 +18,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.futuramaproject.R
+import com.example.futuramaproject.components.CircularLoading
+import com.example.futuramaproject.components.EmptyScreen
 import com.example.futuramaproject.components.FuturamaAppBar
 import com.example.futuramaproject.data.model.CharacterItem
 import com.example.futuramaproject.screens.initial.sections.CharacterListScreen
@@ -31,7 +31,7 @@ fun InitialScreen(navHostController: NavHostController) {
     Scaffold(
         topBar = { FuturamaAppBar() }, containerColor = White
     ) { paddingValues ->
-        ContentPage(
+        InitialContent(
             paddingValues = paddingValues,
             navHostController = navHostController
         )
@@ -39,7 +39,7 @@ fun InitialScreen(navHostController: NavHostController) {
 }
 
 @Composable
-private fun ContentPage(
+private fun InitialContent(
     paddingValues: PaddingValues,
     navHostController: NavHostController
 ) {
@@ -48,38 +48,10 @@ private fun ContentPage(
     val items by viewModel.items.observeAsState()
 
     when {
-        isLoading -> InitialScreenLoading()
-        items.isNullOrEmpty() -> InitialEmptyScreen()
+        isLoading -> CircularLoading()
+        items.isNullOrEmpty() -> EmptyScreen()
         else -> CharacterListScreen(
             paddingValues, navHostController, items ?: listOf()
-        )
-    }
-}
-
-@Composable
-fun InitialScreenLoading() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        CircularProgressIndicator(
-            modifier = Modifier.size(Dimens.SizeLarge),
-            color = MaterialTheme.colorScheme.primary
-        )
-    }
-}
-
-@Composable
-fun InitialEmptyScreen() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = stringResource(id = R.string.no_data_returned),
-            color = MaterialTheme.colorScheme.primary,
-            fontSize = Dimens.FontSizeXXXLarge,
-            fontWeight = FontWeight.Bold
         )
     }
 }

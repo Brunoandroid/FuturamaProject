@@ -7,9 +7,9 @@ import com.example.futuramaproject.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FuturamaAppBar() {
+fun FuturamaAppBar(title: Int? = null) {
     TopAppBar(
-        title = { Text(text = stringResource(R.string.app_name)) },
+        title = { Text(text = stringResource(title ?: R.string.app_name)) },
         colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primary)
     )
 }

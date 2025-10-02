@@ -28,7 +28,7 @@ fun HomeScreen(navHostController: NavHostController) {
     Scaffold(
         topBar = { FuturamaAppBar() },
     ) { paddingValues ->
-        ContentPage(
+        HomeContent(
             navHostController,
             paddingValues
         )
@@ -36,7 +36,7 @@ fun HomeScreen(navHostController: NavHostController) {
 }
 
 @Composable
-fun ContentPage(
+fun HomeContent(
     navHostController: NavHostController,
     paddingValues: PaddingValues
 ) {

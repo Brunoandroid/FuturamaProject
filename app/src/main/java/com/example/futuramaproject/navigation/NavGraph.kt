@@ -1,9 +1,11 @@
 package com.example.futuramaproject.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.futuramaproject.navigation.Screen
 import com.example.futuramaproject.screens.detail.DetailsScreen
 import com.example.futuramaproject.screens.home.HomeScreen
@@ -25,7 +27,8 @@ fun SetupNavGraph() {
             InitialScreen(navHostController = navHostController)
         }
         composable(
-            route = Screen.Detail.route
+            route = Screen.Detail.route,
+            arguments = listOf(navArgument("id") { type = NavType.IntType })
         ) {
             DetailsScreen()
         }
