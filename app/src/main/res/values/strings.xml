@@ -13,7 +13,7 @@
     <string name="species_label">Espécie</string>
     <string name="gender_label">Gênero</string>
     <string name="about_label">Sobre</string>
-    <string name="about_description">%1$s, um personagem de Futurama. Informação de exemplo: nasceu na véspera de Ano Novo de 1999, foi congelado e descongelado anos depois. Trabalha na Planet Express.</string>
+    <string name="about_description">%1$s é um personagem do universo de Futurama. Cada um possui sua própria história, características únicas e participa de aventuras junto à equipe da Planet Express.</string>
     <string name="details_label">Detalhes</string>
     <string name="home_planet">Planeta natal</string>
     <string name="first_appearance">Primeira aparição</string>

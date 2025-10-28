@@ -25,4 +25,6 @@ object Dimens {
     val SizeXXXLarge = 200.dp
 
     val RadiusMedium = 16.dp
+
+    val StrokeSmall = 1.dp
 }

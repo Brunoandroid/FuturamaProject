@@ -1,23 +1,14 @@
 package com.example.futuramaproject.screens.initial
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.futuramaproject.R
 import com.example.futuramaproject.components.CircularLoading
 import com.example.futuramaproject.components.EmptyScreen
 import com.example.futuramaproject.components.FuturamaAppBar
@@ -58,7 +49,7 @@ private fun InitialContent(
 
 @Composable
 @Preview(showBackground = true)
-fun DetailScreenPreview() {
+fun CharacterListScreenPreview() {
     val fakeCharacters = listOf(
         CharacterItem("2024-01-01", "Male", 1, "", "Bender", "Robot", "Alive"),
         CharacterItem("2024-01-02", "Female", 2, "", "Leela", "Mutant", "Alive"),

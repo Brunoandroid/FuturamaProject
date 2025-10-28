@@ -1,9 +1,9 @@
 package com.example.futuramaproject.screens.detail.sections
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,6 +38,7 @@ fun CharacterInfoSection(characterItem: CharacterItem?) {
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(Dimens.RadiusMedium),
         colors = CardDefaults.cardColors(containerColor = White),
+        border = BorderStroke(Dimens.StrokeSmall, color = MaterialTheme.colorScheme.outline),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {
         Column(

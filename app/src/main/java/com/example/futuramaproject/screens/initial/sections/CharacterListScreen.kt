@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import com.example.futuramaproject.navigation.Screen
 import com.example.futuramaproject.data.model.CharacterItem
 
 @Composable

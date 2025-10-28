@@ -1,6 +1,8 @@
 package com.example.futuramaproject.screens.detail
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -42,10 +44,11 @@ private fun DetailsContent(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
-                    .padding(Dimens.PaddingMedium),
+                    .padding(Dimens.PaddingMedium)
+                    .verticalScroll(rememberScrollState()),
             ) {
                 CharacterInfoSection(characterItem)
-                Spacer(modifier = Modifier.height(Dimens.PaddingLarge))
+                Spacer(modifier = Modifier.height(Dimens.PaddingMedium))
                 CharacterDetailsSection(characterItem)
             }
         }

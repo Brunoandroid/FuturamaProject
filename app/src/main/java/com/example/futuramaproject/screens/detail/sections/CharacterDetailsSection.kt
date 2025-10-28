@@ -1,5 +1,6 @@
 package com.example.futuramaproject.screens.detail.sections
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -19,29 +20,50 @@ import com.example.futuramaproject.ui.theme.White
 
 @Composable
 fun CharacterDetailsSection(characterItem: CharacterItem?) {
-    CustomText(text = stringResource(id = R.string.about_label))
+    CustomText(
+        text = stringResource(id = R.string.about_label),
+        fontWeight = FontWeight.Bold,
+        fontSize = Dimens.FontSizeXLarge,
+    )
     Spacer(modifier = Modifier.height(Dimens.MarginSmall))
     Text(
         text = stringResource(id = R.string.about_description, characterItem?.name ?: ""),
         style = MaterialTheme.typography.bodyMedium,
     )
 
-    Spacer(modifier = Modifier.height(Dimens.PaddingLarge))
+    Spacer(modifier = Modifier.height(Dimens.MarginLarge))
 
-    CustomText(text = stringResource(id = R.string.details_label))
+    CustomText(
+        text = stringResource(id = R.string.details_label),
+        fontWeight = FontWeight.Bold,
+        fontSize = Dimens.FontSizeXLarge,
+    )
     Spacer(modifier = Modifier.height(Dimens.MarginSmall))
 
     Column(modifier = Modifier.fillMaxWidth()) {
-        DetailChipCard(title = stringResource(id = R.string.earth), subtitle = stringResource(id = R.string.home_planet))
+        DetailChipCard(
+            title = stringResource(id = R.string.earth),
+            subtitle = stringResource(id = R.string.home_planet),
+        )
         Spacer(modifier = Modifier.height(Dimens.MarginSmall))
-        DetailChipCard(title = stringResource(id = R.string.space_pilot_3000), subtitle = stringResource(id = R.string.first_appearance))
+        DetailChipCard(
+            title = stringResource(id = R.string.space_pilot_3000),
+            subtitle = stringResource(id = R.string.first_appearance),
+        )
     }
 }
 
 @Composable
-private fun DetailChipCard(title: String, subtitle: String) {
+private fun DetailChipCard(title: String, subtitle: String, isBorderStroke: Boolean = true) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+                then if (isBorderStroke) Modifier.border(
+            width = Dimens.StrokeSmall,
+            shape = RoundedCornerShape(Dimens.RadiusMedium),
+            color = MaterialTheme.colorScheme.outline
+
+        ) else Modifier,
         shape = RoundedCornerShape(Dimens.RadiusMedium),
         colors = CardDefaults.cardColors(containerColor = White),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
