@@ -15,7 +15,6 @@ import com.example.futuramaproject.components.CustomText
 import com.example.futuramaproject.components.LoadImageUrl
 import com.example.futuramaproject.data.model.CharacterItem
 import com.example.futuramaproject.ui.theme.Dimens
-import com.example.futuramaproject.ui.theme.White
 
 @Composable
 fun CharacterInfoSection(characterItem: CharacterItem?) {
@@ -37,7 +36,7 @@ fun CharacterInfoSection(characterItem: CharacterItem?) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(Dimens.RadiusMedium),
-        colors = CardDefaults.cardColors(containerColor = White),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         border = BorderStroke(Dimens.StrokeSmall, color = MaterialTheme.colorScheme.outline),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {

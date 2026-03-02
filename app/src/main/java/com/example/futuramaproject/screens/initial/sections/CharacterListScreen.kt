@@ -1,5 +1,6 @@
 package com.example.futuramaproject.screens.initial.sections
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -10,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.example.futuramaproject.data.model.CharacterItem
+import com.example.futuramaproject.ui.theme.Dimens
 
 @Composable
 fun CharacterListScreen(
@@ -21,12 +23,16 @@ fun CharacterListScreen(
         modifier = Modifier
             .fillMaxSize()
             .padding(paddingValues),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(Dimens.MarginSmall),
+        contentPadding = PaddingValues(
+            horizontal = Dimens.PaddingMedium,
+            vertical = Dimens.MarginSmall
+        )
     ) {
         items(characters) { character ->
             CharacterListItem(
-                navHostController,
-                character,
+                character = character,
                 onClick = { navHostController.navigate("detail_screen/${character.id}") }
             )
         }

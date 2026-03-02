@@ -15,7 +15,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.example.futuramaproject.R
 import com.example.futuramaproject.components.LoadImageLocal
-import com.example.futuramaproject.ui.theme.Black
+import androidx.compose.material3.MaterialTheme
 import com.example.futuramaproject.ui.theme.Dimens
 
 @Composable
@@ -26,7 +26,7 @@ fun FullScreenImageDialog(onDismiss: () -> Unit) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Black)
+                .background(MaterialTheme.colorScheme.scrim)
         ) {
             LoadImageLocal(
                 imageResId = R.drawable.futurama, isFillMaxSize = true

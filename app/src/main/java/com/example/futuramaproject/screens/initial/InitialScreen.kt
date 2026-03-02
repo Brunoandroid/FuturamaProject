@@ -1,6 +1,7 @@
 package com.example.futuramaproject.screens.initial
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -15,12 +16,11 @@ import com.example.futuramaproject.components.FuturamaAppBar
 import com.example.futuramaproject.data.model.CharacterItem
 import com.example.futuramaproject.screens.initial.sections.CharacterListScreen
 import com.example.futuramaproject.ui.theme.Dimens
-import com.example.futuramaproject.ui.theme.White
 
 @Composable
 fun InitialScreen(navHostController: NavHostController) {
     Scaffold(
-        topBar = { FuturamaAppBar() }, containerColor = White
+        topBar = { FuturamaAppBar() }, containerColor = MaterialTheme.colorScheme.background
     ) { paddingValues ->
         InitialContent(
             paddingValues = paddingValues,

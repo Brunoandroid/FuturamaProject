@@ -27,4 +27,6 @@ object Dimens {
     val RadiusMedium = 16.dp
 
     val StrokeSmall = 1.dp
+
+    val ElevationSmall = 1.dp
 }

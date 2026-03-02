@@ -16,7 +16,6 @@ import com.example.futuramaproject.R
 import com.example.futuramaproject.components.CustomText
 import com.example.futuramaproject.data.model.CharacterItem
 import com.example.futuramaproject.ui.theme.Dimens
-import com.example.futuramaproject.ui.theme.White
 
 @Composable
 fun CharacterDetailsSection(characterItem: CharacterItem?) {
@@ -65,7 +64,7 @@ private fun DetailChipCard(title: String, subtitle: String, isBorderStroke: Bool
 
         ) else Modifier,
         shape = RoundedCornerShape(Dimens.RadiusMedium),
-        colors = CardDefaults.cardColors(containerColor = White),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {
         Column(

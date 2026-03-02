@@ -19,9 +19,7 @@ import com.example.futuramaproject.navigation.Screen
 import com.example.futuramaproject.components.FuturamaAppBar
 import com.example.futuramaproject.components.LoadImageLocal
 import com.example.futuramaproject.screens.home.sections.FullScreenImageDialog
-import com.example.futuramaproject.ui.theme.Black
 import com.example.futuramaproject.ui.theme.Dimens
-import com.example.futuramaproject.ui.theme.White
 
 @Composable
 fun HomeScreen(navHostController: NavHostController) {
@@ -63,12 +61,12 @@ fun HomeContent(
                 .padding(top = Dimens.PaddingXLarge)
                 .fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Black,
+                containerColor = MaterialTheme.colorScheme.primary,
             ),
             shape = RectangleShape,
             onClick = { navHostController.navigate(Screen.Initial.route) }
         ) {
-            Text(color = White, text = stringResource(id = R.string.see_characters))
+            Text(color = MaterialTheme.colorScheme.onPrimary, text = stringResource(id = R.string.see_characters))
         }
 
         if (showDialog) {
