@@ -6,7 +6,7 @@ Aplicativo Android que exibe uma lista com os personagens da sitcom animada **Fu
 
 ### Layout mobile
 
-<img src="https://github.com/Brunoandroid/Imagens/blob/main/futurama.gif" width="350" height="700"/>
+<img src="https://github.com/Brunoandroid/Imagens/blob/main/futurama_all.gif" width="250" height="500"/>
 
 ## Funcionalidades
 
