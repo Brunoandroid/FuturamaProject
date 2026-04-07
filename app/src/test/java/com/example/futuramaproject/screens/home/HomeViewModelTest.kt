@@ -17,12 +17,14 @@ class HomeViewModelTest {
     @Test
     fun `showDialog() should update isShowDialog state to true`() = runTest {
         viewModel.showDialog()
-        assertTrue(viewModel.isShowDialog.value)
+        val state = viewModel.uiState.value
+        assertTrue(state.isShowDialog)
     }
 
     @Test
     fun `hideDialog() should update isShowDialog state to false`() = runTest {
         viewModel.hideDialog()
-        assertFalse(viewModel.isShowDialog.value)
+        val state = viewModel.uiState.value
+        assertFalse(state.isShowDialog)
     }
 }

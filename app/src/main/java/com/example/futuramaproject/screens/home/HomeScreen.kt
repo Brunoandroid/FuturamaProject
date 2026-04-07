@@ -39,7 +39,7 @@ fun HomeContent(
     paddingValues: PaddingValues
 ) {
     val viewModel: HomeViewModel = viewModel()
-    val showDialog by viewModel.isShowDialog.collectAsState()
+    val uiState by viewModel.uiState.collectAsState()
 
     Column(
         modifier = Modifier
@@ -66,10 +66,13 @@ fun HomeContent(
             shape = RectangleShape,
             onClick = { navHostController.navigate(Screen.Initial.route) }
         ) {
-            Text(color = MaterialTheme.colorScheme.onPrimary, text = stringResource(id = R.string.see_characters))
+            Text(
+                color = MaterialTheme.colorScheme.onPrimary,
+                text = stringResource(id = R.string.see_characters)
+            )
         }
 
-        if (showDialog) {
+        if (uiState.isShowDialog) {
             FullScreenImageDialog(onDismiss = { viewModel.hideDialog() })
         }
     }

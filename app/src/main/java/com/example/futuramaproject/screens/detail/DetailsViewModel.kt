@@ -1,15 +1,23 @@
 package com.example.futuramaproject.screens.detail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.SavedStateHandle
 import com.example.futuramaproject.data.model.CharacterItem
 import com.example.futuramaproject.data.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+data class DetailsUiState(
+    val character: CharacterItem? = null,
+    val isLoading: Boolean = false,
+    val isError: Boolean = false
+)
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
@@ -17,11 +25,8 @@ class DetailsViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _character = MutableLiveData<CharacterItem?>()
-    val character: LiveData<CharacterItem?> = _character
-
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
+    private val _uiState = MutableStateFlow(DetailsUiState())
+    val uiState: StateFlow<DetailsUiState> = _uiState.asStateFlow()
 
     init {
         fetchDetails()
@@ -30,18 +35,16 @@ class DetailsViewModel @Inject constructor(
     private fun fetchDetails() {
         val id: Int? = savedStateHandle["id"]
         if (id == null) {
-            _character.postValue(null)
+            _uiState.update { it.copy(isError = false, isLoading = false) }
             return
         }
         viewModelScope.launch {
-            _isLoading.postValue(true)
+            _uiState.update { it.copy(isError = false, isLoading = true) }
             try {
                 val characterItem = repository.getCharacterDetails(id)
-                _character.postValue(characterItem)
+                _uiState.update { it.copy(character = characterItem, isLoading = false) }
             } catch (e: Exception) {
-                _character.postValue(null)
-            } finally {
-                _isLoading.postValue(false)
+                _uiState.update { it.copy(isError = true, isLoading = false) }
             }
         }
     }

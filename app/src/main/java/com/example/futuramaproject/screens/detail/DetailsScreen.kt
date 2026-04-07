@@ -5,8 +5,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.futuramaproject.R
@@ -33,24 +33,23 @@ private fun DetailsContent(
     paddingValues: PaddingValues
 ) {
     val viewModel: DetailsViewModel = hiltViewModel()
-    val isLoading by viewModel.isLoading.observeAsState(initial = true)
-    val characterItem by viewModel.character.observeAsState()
+    val uiState by viewModel.uiState.collectAsState()
 
-    when {
-        isLoading -> CircularLoading()
-        characterItem == null -> EmptyScreen()
-        else -> {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-                    .padding(Dimens.PaddingMedium)
-                    .verticalScroll(rememberScrollState()),
-            ) {
-                CharacterInfoSection(characterItem)
-                Spacer(modifier = Modifier.height(Dimens.PaddingMedium))
-                CharacterDetailsSection(characterItem)
-            }
+    if (uiState.isLoading) {
+        CircularLoading()
+    } else if (uiState.isError) {
+        EmptyScreen()
+    } else if (uiState.character != null) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(Dimens.PaddingMedium)
+                .verticalScroll(rememberScrollState()),
+        ) {
+            CharacterInfoSection(uiState.character)
+            Spacer(modifier = Modifier.height(Dimens.PaddingMedium))
+            CharacterDetailsSection(uiState.character)
         }
     }
 }

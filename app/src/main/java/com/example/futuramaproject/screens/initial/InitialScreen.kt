@@ -4,18 +4,14 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
+import androidx.paging.LoadState
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.futuramaproject.components.CircularLoading
 import com.example.futuramaproject.components.EmptyScreen
 import com.example.futuramaproject.components.FuturamaAppBar
-import com.example.futuramaproject.data.model.CharacterItem
 import com.example.futuramaproject.screens.initial.sections.CharacterListScreen
-import com.example.futuramaproject.ui.theme.Dimens
 
 @Composable
 fun InitialScreen(navHostController: NavHostController) {
@@ -35,27 +31,18 @@ private fun InitialContent(
     navHostController: NavHostController
 ) {
     val viewModel: InitialViewModel = hiltViewModel()
-    val isLoading by viewModel.isLoading.observeAsState(true)
-    val items by viewModel.items.observeAsState()
+    val items = viewModel.items.collectAsLazyPagingItems()
 
     when {
-        isLoading -> CircularLoading()
-        items.isNullOrEmpty() -> EmptyScreen()
+        items.loadState.refresh is LoadState.Loading -> CircularLoading()
+        items.itemCount == 0 && items.loadState.refresh is LoadState.NotLoading -> EmptyScreen()
         else -> CharacterListScreen(
-            paddingValues, navHostController, items ?: listOf()
+            paddingValues,
+            navHostController,
+            items,
+            onItemClick = { item ->
+                navHostController.navigate("detail_screen/${item}")
+            }
         )
     }
-}
-
-@Composable
-@Preview(showBackground = true)
-fun CharacterListScreenPreview() {
-    val fakeCharacters = listOf(
-        CharacterItem("2024-01-01", "Male", 1, "", "Bender", "Robot", "Alive"),
-        CharacterItem("2024-01-02", "Female", 2, "", "Leela", "Mutant", "Alive"),
-        CharacterItem("2024-01-03", "Male", 3, "", "Fry", "Human", "Alive")
-    )
-    CharacterListScreen(
-        PaddingValues(Dimens.PaddingMedium), navHostController = rememberNavController(), fakeCharacters
-    )
 }

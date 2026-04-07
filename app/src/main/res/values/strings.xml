@@ -20,4 +20,7 @@
     <string name="earth">Terra</string>
     <string name="space_pilot_3000">Space Pilot 3000</string>
 
+    <string name="error_loading_more">Erro ao carregar mais personagens</string>
+    <string name="retry_label">Tentar novamente</string>
+
 </resources>
